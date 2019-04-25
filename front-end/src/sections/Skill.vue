@@ -4,8 +4,8 @@
       <v-layout align-center justify-center>
         <v-flex xs12 md6>
           <div class="wrapper-content">
-            <template v-for="(skill, skillIndex) in skills">
-              <div :key="`skill-${skillIndex}`">
+            <template v-for="(skill, index) in skills">
+              <div :key="`skill-${index}`">
                 <div class="title">{{ skill.category }}</div>
                 <div class="text-skill">{{ skill.list.toString() }}</div>
               </div>

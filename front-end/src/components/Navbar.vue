@@ -1,82 +1,63 @@
 <template>
   <v-toolbar dark fixed class="transparent">
-    <v-toolbar-title class="nav-title">Tsz's Profile</v-toolbar-title>
+    <v-toolbar-title id="nav-title">Tsz's Portfolio</v-toolbar-title>
     <v-toolbar-items class="hidden-sm-and-down">
       <template v-for="(section, index) in sections">
-        <v-btn
-          flat
-          :key="`section-btn-${index}`"
-          @click="goToSection(section.link)"
-        >{{ section.label }}</v-btn>
+        <button-section :key="`section-btn-${index}`" :label="section.label" :link="section.link"/>
       </template>
     </v-toolbar-items>
     <v-spacer></v-spacer>
     <v-toolbar-items class="hidden-sm-and-down">
       <button-linked-in/>
+      <button-git-hub/>
     </v-toolbar-items>
     <v-toolbar-items v-if="this.$vuetify.breakpoint.smAndDown">
-      <v-menu :nudge-width="100">
-        <template v-slot:activator="{ on }">
-          <v-toolbar-side-icon v-on="on"/>
-        </template>
-        <v-list>
-          <v-list-tile
-            v-for="(section, index) in sections"
-            :key="`section-list-item-${index}`"
-            @click="goToSection(section.link)"
-          >
-            <v-list-tile-title v-text="section.label"></v-list-tile-title>
-          </v-list-tile>
-          <v-divider></v-divider>
-          <v-list-tile>
-            <button-linked-in :dark="false"></button-linked-in>
-          </v-list-tile>
-        </v-list>
-      </v-menu>
+      <navbar-menu :sections="sections"/>
     </v-toolbar-items>
   </v-toolbar>
 </template>
 
 <script>
-import ButtonLinkedIn from "@/components/buttons/ButtonLinkedIn.vue";
+import ButtonLinkedIn from '@/components/buttons/ButtonLinkedIn.vue'
+import ButtonGitHub from '@/components/buttons/ButtonGitHub.vue'
+import ButtonSection from '@/components/buttons/ButtonSection.vue'
+import NavbarMenu from '@/components/NavbarMenu.vue'
 
 export default {
-  name: "navbar",
+  name: 'navbar',
   components: {
-    ButtonLinkedIn
+    ButtonLinkedIn,
+    ButtonGitHub,
+    ButtonSection,
+    NavbarMenu
   },
   data: () => ({
     sections: [
       {
-        label: "About",
-        link: "about"
+        label: 'About',
+        link: 'about'
       },
       {
-        label: "Experiences",
-        link: "experiences"
+        label: 'Experiences',
+        link: 'experiences'
       },
       {
-        label: "Projects",
-        link: "projects"
+        label: 'Projects',
+        link: 'projects'
       },
       {
-        label: "Skills",
-        link: "skills"
+        label: 'Skills',
+        link: 'skills'
       }
     ],
     drawer: false
-  }),
-  methods: {
-    goToSection(section) {
-      location.href = `#${section}`;
-    }
-  }
-};
+  })
+}
 </script>
 
 <style scoped>
-.nav-title {
-  font-family: "Crimson Text";
+#nav-title {
+  font-family: 'Crimson Text';
   margin-right: 24px;
   font-size: 25px;
 }

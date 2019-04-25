@@ -8,53 +8,13 @@
             <v-tab>Feature</v-tab>
             <v-tab>Techniques</v-tab>
             <v-tab-item v-if="showSectionBackground" class="conent-dialog">
-              <v-card class="wrapper-content">
-                <v-card-text class="wrapper-background">
-                  <div>
-                    <template v-for="(background, bgIndex) in project.detail.background">
-                      <p :key="`bg-${bgIndex}`">{{ background }}</p>
-                    </template>
-                  </div>
-                </v-card-text>
-              </v-card>
+              <card-background :background="project.detail.background"/>
             </v-tab-item>
             <v-tab-item class="conent-dialog">
-              <v-card class="wrapper-content">
-                <v-card-text class="wrapper-feature subheading">
-                  <ol>
-                    <li
-                      v-for="(feature, featureIndex) in project.detail.features"
-                      :key="`feature-${featureIndex}`"
-                    >
-                      <div class="feature-text">{{ feature.text }}</div>
-                      <div>
-                        <img
-                          class="feature-image"
-                          :src="`${publicPath}${feature.image}`"
-                          :alt="feature.text"
-                        >
-                      </div>
-                    </li>
-                  </ol>
-                </v-card-text>
-              </v-card>
+              <card-feature :features="project.detail.features"/>
             </v-tab-item>
             <v-tab-item class="conent-dialog">
-              <v-card class="wrapper-content">
-                <v-card-text class="wrapper-technique subheading">
-                  <ul>
-                    <li
-                      v-for="(technique, techniqueIndex) in project.detail.techniques"
-                      :key="`technique-${techniqueIndex}`"
-                    >
-                      <div class="technique-text">
-                        <span class="font-weight-bold">{{ technique.category }}:</span>
-                        {{ technique.list.toString() }}
-                      </div>
-                    </li>
-                  </ul>
-                </v-card-text>
-              </v-card>
+              <card-technique :techniques="project.detail.techniques"/>
             </v-tab-item>
           </v-tabs>
         </v-card-text>
@@ -64,9 +24,18 @@
 </template>
 
 <script>
-import Project from "@/models/project.js";
+import CardBackground from '@/components/project/CardBackground.vue'
+import CardFeature from '@/components/project/CardFeature.vue'
+import CardTechnique from '@/components/project/CardTechnique.vue'
+
+import Project from '@/models/project.js'
 
 export default {
+  components: {
+    CardBackground,
+    CardFeature,
+    CardTechnique
+  },
   data() {
     return {
       dialog: false,
@@ -74,50 +43,31 @@ export default {
       selectedTab: 0,
       publicPath: process.env.BASE_URL,
       showSectionBackground: true
-    };
+    }
   },
   methods: {
     showDialog(project) {
-      this.selectedTab = 0;
-      this.showSectionBackground = project.detail.background ? true : false;
-      this.dialog = true;
-      this.project = project;
+      this.selectedTab = 0
+      this.showSectionBackground = project.detail.background ? true : false
+      this.dialog = true
+      this.project = project
     }
   }
-};
+}
 </script>
 
-<style lang="css" scoped>
-.wrapper-background {
-  text-align: left;
-}
-.feature-image {
-  max-height: 300px;
-  margin-bottom: 10px;
-}
-.wrapper-feature {
-  text-align: left;
-  vertical-align: middle;
-}
-.conent-dialog {
-  /* width: 750px;
-  height: 400px; */
+<style lang="css">
+.wrapper-content {
+  height: 350px;
   overflow-y: auto;
 }
-.feature-text {
-  margin-bottom: 10px;
-}
-.wrapper-content {
-  /* width: 100%;*/
-  height: 350px;
+</style>
+<style lang="css" scoped>
+.conent-dialog {
   overflow-y: auto;
 }
 .wrapper-content-dialog {
   width: 100%;
   height: 450px;
-  /* overflow-y: auto; */
-}
-.wrapper-technique {
-  text-align: left;
 }
 </style>

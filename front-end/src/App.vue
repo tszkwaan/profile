@@ -11,13 +11,13 @@
   </v-app>
 </template>
 <script>
-import Navbar from "@/components/Navbar.vue";
+import Navbar from '@/components/Navbar.vue'
 
 export default {
   components: {
     Navbar
   }
-};
+}
 </script>
 <style lang="scss">
 html,
@@ -27,7 +27,7 @@ body,
   height: 100%;
 }
 #app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -49,7 +49,7 @@ nav {
   }
 }
 .section-headline {
-  font-family: "Old Standard TT script=latin rev=1";
+  font-family: 'Old Standard TT script=latin rev=1';
   text-align: left;
   margin-bottom: 1rem;
 }

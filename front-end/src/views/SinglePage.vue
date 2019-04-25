@@ -8,10 +8,10 @@
 </template>
 
 <script>
-import About from "@/views/About.vue";
-import Experience from "@/views/Experience.vue";
-import Skill from "@/views/Skill.vue";
-import Project from "@/views/Project.vue";
+import About from "@/sections/About.vue";
+import Experience from "@/sections/Experience.vue";
+import Skill from "@/sections/Skill.vue";
+import Project from "@/sections/Project.vue";
 
 export default {
   name: "SinglePage",
